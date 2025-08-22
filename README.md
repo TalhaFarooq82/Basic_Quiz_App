@@ -16,7 +16,6 @@ The **Basic Quiz App** is a Flask-based web application that allows admins to cr
 Basic_Quiz_App/
 │── run.py                # Entry point
 │── config.py             # App configuration
-│── some_queries.txt      # Sample database queries
 │── app/
 │   ├── __init__.py       # Flask app factory
 │   ├── models.py         # Database models
