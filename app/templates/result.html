@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #1e1e2f;
+            font-family: 'Segoe UI', sans-serif;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        h2, h3 {
+            text-align: center;
+            color: #ffffff;
+        }
+
+        p {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 90%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: #2b2b3d;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        li {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+
+        strong {
+            color: #9dbde2;
+        }
+
+        a {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            text-align: center;
+            background-color: #27405e;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            background-color: #3b7ed0;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Score: {{ score }}/{{ total }}</h2>
+
+    {% if chart_filename %}
+        <h3>Your Performance:</h3>
+        <img src="{{ url_for('static', filename='charts/' ~ chart_filename) }}" alt="Performance Chart">
+    {% endif %}
+
+    <h3>Feedback:</h3>
+    <p>{{ feedback }}</p>
+
+    <h3>Quiz Summary:</h3>
+    <ul>
+        {% for item in summary %}
+            <li>
+                <strong>Q:</strong> {{ item.question }}<br>
+                <strong>Your Answer:</strong> {{ item.your_answer }}<br>
+                {% if item.is_correct %}
+                    ✅
+                {% else %}
+                    ❌
+                {% endif %}
+                <br>
+                <strong>Correct Answer:</strong> {{ item.correct_answer }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('quiz.dashboard') }}">← Back to Dashboard</a>
+</body>
+</html>
